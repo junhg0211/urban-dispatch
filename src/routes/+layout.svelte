@@ -10,6 +10,8 @@
       color: #19191e;
       cursor: default;
       user-select: none;
+      letter-spacing: -1px;
+      overflow-y: hidden;
     }
   </style>
 </sveltekit:head>

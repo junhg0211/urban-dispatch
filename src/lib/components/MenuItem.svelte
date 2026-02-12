@@ -9,7 +9,7 @@
     font-size: 32px;
     font-weight: 900;
     width: fit-content;
-    padding: 0 8px;
+    padding: 2px 6px;
     transition: color 0.2s ease, background-color 0.2s ease;
   }
 

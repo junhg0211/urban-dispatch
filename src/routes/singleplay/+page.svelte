@@ -2,8 +2,14 @@
   import MenuItem from "$lib/components/MenuItem.svelte";
   import Container from "$lib/components/Container.svelte";
   import { goto } from "$app/navigation";
+  import "bootstrap-icons/font/bootstrap-icons.css";
 
   let container: Container;
+
+  async function play() {
+    await container.fadeOut();
+    goto("/ingame");
+  }
 
   async function back() {
     await container.fadeOut();
@@ -17,7 +23,7 @@
     <div class="subtitle">Singleplay</div>
   </div>
   <div class="right">
-    <MenuItem><i class="bi bi-airplane-fill"></i> 플레이</MenuItem>
+    <MenuItem onclick={play}><i class="bi bi-airplane-fill"></i> 플레이</MenuItem>
     <MenuItem onclick={back}><i class="bi bi-sign-turn-left-fill"></i> 뒤로</MenuItem>
   </div>
 </Container>
