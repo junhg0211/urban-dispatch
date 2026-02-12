@@ -22,7 +22,7 @@
     <div class="title">
       교통량<br>안정도<br>평가보고
     </div>
-    <div class="subtitle">Urban Dispatch</div>
+    <div class="subtitle">Urban Dispatch <span class="version">v0.1.0</span></div>
   </div>
   <div class="right">
     <MenuItem onclick={singleplay}><i class="bi bi-person-walking"></i> 혼자서 플레이</MenuItem>
@@ -45,6 +45,12 @@
   .subtitle {
     font-size: 32px;
     font-weight: 900;
+  }
+
+  .version {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 8px;
   }
 
   .right {
