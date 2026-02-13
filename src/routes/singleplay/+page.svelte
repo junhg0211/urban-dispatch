@@ -1,51 +1,51 @@
 <script lang="ts">
-  import MenuItem from "$lib/components/MenuItem.svelte";
-  import Container from "$lib/components/Container.svelte";
-  import { goto } from "$app/navigation";
-  import "bootstrap-icons/font/bootstrap-icons.css";
+	import MenuItem from '$lib/components/MenuItem.svelte';
+	import Container from '$lib/components/Container.svelte';
+	import { goto } from '$app/navigation';
+	import 'bootstrap-icons/font/bootstrap-icons.css';
 
-  let container: Container;
+	let container: Container;
 
-  async function play() {
-    await container.fadeOut();
-    goto("/ingame");
-  }
+	async function play() {
+		await container.fadeOut();
+		goto('/ingame');
+	}
 
-  async function back() {
-    await container.fadeOut();
-    goto("/mainmenu");
-  }
+	async function back() {
+		await container.fadeOut();
+		goto('/mainmenu');
+	}
 </script>
 
 <Container bind:this={container}>
-  <div class="left">
-    <div class="title">혼자서<br>플레이</div>
-    <div class="subtitle">Singleplay</div>
-  </div>
-  <div class="right">
-    <MenuItem onclick={play}><i class="bi bi-airplane-fill"></i> 플레이</MenuItem>
-    <MenuItem onclick={back}><i class="bi bi-sign-turn-left-fill"></i> 뒤로</MenuItem>
-  </div>
+	<div class="left">
+		<div class="title">혼자서<br />플레이</div>
+		<div class="subtitle">Singleplay</div>
+	</div>
+	<div class="right">
+		<MenuItem onclick={play}><i class="bi bi-airplane-fill"></i> 플레이</MenuItem>
+		<MenuItem onclick={back}><i class="bi bi-sign-turn-left-fill"></i> 뒤로</MenuItem>
+	</div>
 </Container>
 
 <style>
-  .left {
-    text-align: right;
-  }
+	.left {
+		text-align: right;
+	}
 
-  .title {
-    font-size: 128px;
-    font-weight: 900;
-  }
+	.title {
+		font-size: 128px;
+		font-weight: 900;
+	}
 
-  .subtitle {
-    font-size: 32px;
-    font-weight: 900;
-  }
+	.subtitle {
+		font-size: 32px;
+		font-weight: 900;
+	}
 
-  .right {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
+	.right {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
 </style>

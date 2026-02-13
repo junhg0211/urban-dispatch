@@ -3,6 +3,7 @@
 	import { Camera } from '$lib/objets/camera';
 	import { FilledCircle } from '$lib/objets/objets';
 	import { goto } from '$app/navigation';
+	import { Background } from '$lib/objets/background';
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
@@ -11,6 +12,7 @@
 	const cameraTarget = new Camera(0, 0, 1);
 
 	const objects = [new FilledCircle(0, 0, 50, '#0000003f')];
+	const background = new Background(1);
 
 	function lerp(start: number, end: number, t: number): number {
 		return start + (end - start) * t;
@@ -73,9 +75,23 @@
 	function tick() {
 		if (fps) {
 			const lerpFactor = (0.1 * 60) / fps;
-			camera.x = lerp(camera.x, cameraTarget.x, lerpFactor);
-			camera.y = lerp(camera.y, cameraTarget.y, lerpFactor);
-			camera.zoom = lerp(camera.zoom, cameraTarget.zoom, lerpFactor);
+			const newX = lerp(camera.x, cameraTarget.x, lerpFactor);
+			const newY = lerp(camera.y, cameraTarget.y, lerpFactor);
+			const newZoom = lerp(camera.zoom, cameraTarget.zoom, lerpFactor);
+			if (
+				Math.abs(newX - cameraTarget.x) > 0.01 ||
+				Math.abs(newY - cameraTarget.y) > 0.01 ||
+				Math.abs(newZoom - cameraTarget.zoom) > 0.001
+			) {
+				camera.x = newX;
+				camera.y = newY;
+				camera.zoom = newZoom;
+				background.update = true;
+			} else {
+				camera.x = cameraTarget.x;
+				camera.y = cameraTarget.y;
+				camera.zoom = cameraTarget.zoom;
+			}
 		}
 
 		objects.forEach((obj) => obj.tick && obj.tick());
@@ -85,8 +101,9 @@
 		lastTime = currentTime;
 	}
 
-	function render(ctx) {
+	function render(ctx: CanvasRenderingContext2D) {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		background.render(ctx, camera, canvas);
 
 		objects.forEach((obj) => obj.render && obj.render(ctx, camera, canvas));
 	}
@@ -108,11 +125,11 @@
 		});
 
 		return () => {
-			document.removeEventListener('resize', resize);
-			document.removeEventListener('keydown', keydown);
-			document.removeEventListener('mousedown', mousedown);
-			document.removeEventListener('mouseup', mouseup);
-			document.removeEventListener('mousemove', mousemove);
+			window.removeEventListener('resize', resize);
+			window.removeEventListener('keydown', keydown);
+			window.removeEventListener('mousedown', mousedown);
+			window.removeEventListener('mouseup', mouseup);
+			window.removeEventListener('mousemove', mousemove);
 			window.removeEventListener('wheel', wheel);
 			clearInterval(interval);
 		};
