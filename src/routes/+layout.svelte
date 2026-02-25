@@ -6,8 +6,8 @@
 			font-family: 'SUIT', sans-serif;
 			height: 100vh;
 
-			background-color: #f7f7f9;
-			color: #19191e;
+			background-color: #f3f2e2;
+			color: #313131;
 			cursor: default;
 			user-select: none;
 			letter-spacing: -1px;
